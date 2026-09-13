@@ -14,6 +14,18 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export default function App() {
   const { apiKey } = useLoaderData<typeof loader>();
 
+  if (!apiKey) {
+    return (
+      <main style={{ padding: 24, fontFamily: "sans-serif" }}>
+        <h1>StockPing is missing SHOPIFY_API_KEY</h1>
+        <p>
+          Set SHOPIFY_API_KEY and SHOPIFY_API_SECRET on the Railway app service,
+          then redeploy.
+        </p>
+      </main>
+    );
+  }
+
   return (
     <AppProvider embedded apiKey={apiKey}>
       <s-app-nav>

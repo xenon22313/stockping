@@ -1,38 +1,17 @@
-import { useEffect } from "react";
 import type {
   ActionFunctionArgs,
   HeadersFunction,
   LoaderFunctionArgs,
 } from "react-router";
 import { Form, useActionData, useLoaderData, useNavigation } from "react-router";
-import { useAppBridge } from "@shopify/app-bridge-react";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { authenticate } from "../shopify.server";
 import prisma from "../db.server";
-import { STOCKPING_PLAN } from "../lib/billing.server";
 import { dispatchAlert } from "../lib/notify.server";
 import { getSettings, saveSettings } from "../lib/settings.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const { session, billing, redirect } = await authenticate.admin(request);
-
-  if (process.env.SKIP_BILLING !== "1") {
-    try {
-      await billing.require({
-        plans: [STOCKPING_PLAN],
-        isTest: process.env.SHOPIFY_BILLING_TEST !== "0",
-        onFailure: async () =>
-          billing.request({
-            plan: STOCKPING_PLAN,
-            isTest: process.env.SHOPIFY_BILLING_TEST !== "0",
-          }),
-      });
-    } catch (error) {
-      if (error instanceof Response) throw error;
-      console.error("Billing check failed", error);
-      throw redirect("/app/billing");
-    }
-  }
+  const { session } = await authenticate.admin(request);
 
   const settings = await getSettings(session.shop);
   const recentAlerts = await prisma.alertLog.findMany({
@@ -113,17 +92,15 @@ export default function Index() {
   const { settings, recentAlerts, emailReady, shop } = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
   const navigation = useNavigation();
-  const shopify = useAppBridge();
   const saving = navigation.state === "submitting";
-
-  useEffect(() => {
-    if (actionData?.message) {
-      shopify.toast.show(actionData.message);
-    }
-  }, [actionData, shopify]);
 
   return (
     <s-page heading="StockPing">
+      {actionData?.message ? (
+        <s-banner tone={actionData.ok ? "success" : "critical"}>
+          {actionData.message}
+        </s-banner>
+      ) : null}
       <s-section heading="Low stock alerts">
         <s-paragraph>
           When inventory on {shop} drops to your threshold, StockPing notifies
