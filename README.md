@@ -49,6 +49,9 @@ SHOPIFY_APP_URL=https://<ваш-домен>.up.railway.app
 SHOPIFY_BILLING_TEST=0
 ```
 
+Сначала в сервисе: Settings → Networking → **Generate domain**. Без домена и без `SHOPIFY_API_KEY` / `SHOPIFY_API_SECRET` процесс не стартует (это не «падение кода», а проверка env).
+
+
 `SHOPIFY_API_KEY` и секрет: `shopify app env show` в корне проекта (VPN лучше выключить).
 
 5. После первого деплоя скопируйте публичный URL в `SHOPIFY_APP_URL` и в `shopify.app.toml` (`application_url` + `redirect_urls`), затем:

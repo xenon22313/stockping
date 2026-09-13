@@ -14,4 +14,6 @@ RUN npx prisma generate && npm run build
 
 EXPOSE 3000
 
+RUN chmod +x scripts/docker-start.sh
+
 CMD ["npm", "run", "docker-start"]
