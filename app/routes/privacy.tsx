@@ -30,7 +30,12 @@ export default function Privacy() {
         when Shopify sends a shop/redact request.
       </p>
       <h2>Contact</h2>
-      <p>Replace this with your support email before submitting the app.</p>
+      <p>
+        Support:{" "}
+        <a href="mailto:mihapop.tchibidin@yandex.ru">
+          mihapop.tchibidin@yandex.ru
+        </a>
+      </p>
     </main>
   );
 }

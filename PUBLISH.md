@@ -5,19 +5,20 @@ Shopify не принимает «просто репозиторий». Нуж�
 ## Перед отправкой
 
 - [x] Postgres в схеме + Docker Compose / Railway (`DATABASE_URL`)
-- [ ] Хостинг с HTTPS на Railway. После деплоя: `shopify app deploy`
-- [ ] `SHOPIFY_BILLING_TEST=0` в проде
-- [ ] Свой email поддержки в `/privacy` и в листинге
+- [x] Хостинг Railway: https://stockping-production-4d8f.up.railway.app
+- [x] `shopify app deploy` (версия stockping-2+)
+- [x] Email поддержки в `/privacy`: mihapop.tchibidin@yandex.ru
+- [ ] Тот же email в карточке App Store (Support / Privacy)
 - [ ] Скриншоты админки: настройки, тест, история алертов
-- [ ] Демо-магазин с установленным приложением для ревьюеров
-- [ ] В Dev Dashboard: App URL, redirect URLs, scopes `read_inventory,read_products,read_locations`
-- [ ] Вебхуки из `shopify.app.toml` задеплоены (`shopify app deploy`)
+- [x] Демо-магазин stockping-mihail-dev с установленным приложением
 
 ## Листинг (английский)
 
 **Name:** StockPing  
 **Tagline:** Telegram and email alerts when a SKU hits your low-stock threshold.  
 **Category:** Inventory / Store management  
+**Support / Privacy email:** mihapop.tchibidin@yandex.ru  
+**Privacy URL:** https://stockping-production-4d8f.up.railway.app/privacy  
 **Pricing:** $6.99 / 30 days, 7-day trial if you add it in Partner Dashboard  
 
 **Bullets:**
