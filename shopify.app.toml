@@ -2,11 +2,10 @@
 
 name = "STOCKPING"
 client_id = "cca4999b1699bbd29320d0d0043ed1de"
-application_url = "https://shopify.dev/apps/default-app-home"
+application_url = "https://stockping-production-4d8f.up.railway.app"
 embedded = true
 
 [build]
-include_config_on_deploy = true
 automatically_update_urls_on_dev = true
 
 [access_scopes]
@@ -41,4 +40,7 @@ api_version = "2026-10"
   compliance_topics = [ "shop/redact" ]
 
 [auth]
-redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
+redirect_urls = [
+  "https://stockping-production-4d8f.up.railway.app/auth/callback",
+  "https://stockping-production-4d8f.up.railway.app/auth",
+]
